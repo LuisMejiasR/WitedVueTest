@@ -7,7 +7,7 @@ Repositorio:
 https://github.com/LuisMejiasR/
 
 ## Contexto
-- En el mundo actual, quiero poder demostrar mis habilidades de programación y diseño al dejar disponible en la nube una página web la cual me pueda representar de forma integral, tanto para la parte de diseño como la parte Front-end como la parte Back-end
+- En el mundo actual, quiero poder demostrar mis habilidades de programación y diseño al dejar disponible en la nube una página web la cual me pueda representar teniendo en cuenta que estoy trabajando con nueva tecnología.
 
 ## Librerias y frameworks usados
 - HTML
@@ -17,10 +17,15 @@ https://github.com/LuisMejiasR/
 - TypeScript
 - Pinia
 
-# Avances
+## Avances
+- Se llamó a la API utilizando Axios
+- Se diseñó una página simple responsiva.
+- Cada post tiene titulo, cuerpo y botón.
+- Se agregó tienda de pinia para desplegar post.
 
-## Home
-
-###### 28-08-20223
-- Empezando a documentar el proyecto.
-- Se hizo llamada a API con Axios.
+## Levantar el proyecto:
+- Descargar proyecto mediante URL y git clone desde la terminal.
+- Cambiar a carpeta del proyecto dentro de la terminal.
+- Ejecutar comando 'yarn'.
+- Ejecutar comando 'yarn dev'.
+- Abrir el proyecto en el terminal localhost especificado.

@@ -1,9 +1,10 @@
-<script setup lang="ts">
+<script setup lang='ts'>
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import axiosClient from './utils/axios'
 import { usePostStore } from './stores/postStore'
-import PageHeader from "./components/PageHeader.vue"
+import PageHeader from './components/PageHeader.vue'
+import PostList from './components/PostList.vue'
 
 // pinia store
 const postStore = usePostStore()
@@ -27,7 +28,7 @@ onMounted(() => {
 
 <template>
   <PageHeader />
-  <div v-for="post in postsArr">
-    {{ post.title }}
+  <div class='max-auto px-6'>
+    <PostList :postsArr='postsArr.slice(0, 10)' />
   </div>
 </template>
