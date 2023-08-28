@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import axiosClient from './utils/axios'
 import { usePostStore } from './stores/postStore'
@@ -10,6 +10,13 @@ import { IPost } from './models/post.model';
 // pinia store
 const postStore = usePostStore()
 const { postsArr } = storeToRefs(postStore)
+// search ref
+const search = ref('')
+const filteredPost = ref<IPost[]>([])
+// pagination ref
+const page = ref(1)
+const postPerPage = ref(10)
+const paginatedPost = ref<IPost[]>([])
 
 // async fn calling axios and setting state of pinia store
 const fetchPosts = async () => {
@@ -21,18 +28,29 @@ const fetchPosts = async () => {
   }
 }
 
-// search ref
-const search = ref('')
-const filteredPost = ref<IPost[]>([])
-
-//fn to search posts from user input
+// fn to search posts from user input
 const filterPosts = () => {
   filteredPost.value = postsArr.value.filter((post) => post.title.toLowerCase().includes(search.value.toLowerCase()))
 }
 
-// when component mounts, call fn
+// fn to slice the array of post to show new pages
+const slicePostArr = (currentPost: IPost[]) => {
+  const firtIndex = (page.value - 1) * postPerPage.value
+  const lastInex = page.value * postPerPage.value
+  paginatedPost.value = currentPost.slice(firtIndex, lastInex)
+}
+
+const changePage = (newPage: number) => {
+  page.value = newPage
+}
+
+// when component mounts, call fn to fetch posts
 onMounted(() => {
   fetchPosts()
+})
+
+watch([postsArr, page], () => {
+  slicePostArr(postsArr.value)
 })
 </script>
 
@@ -51,6 +69,15 @@ onMounted(() => {
         Mira estos otros post que te podrían interesar:
       </span>
     </div>
-    <PostList :postsArr='filteredPost.length > 0 ? filteredPost.slice(0, 10) : postsArr.slice(0, 10)' />
+    <div class='mb-8 flex justify-center space-x-6'>
+      <button @click='() => changePage(page - 1)'
+        class='border border-gray-300 rounded px-8 py-1 hover:bg-gray-200'>Anterior</button>
+      <button @click='() => changePage(page + 1)'
+        class='border border-gray-300 rounded px-8 py-1 hover:bg-gray-200'>Siguiente</button>
+    </div>
+    <PostList :postsArr='paginatedPost' />
+    <div class='my-8 flex justify-center space-x-6'>
+      Numero total de post: {{ postsArr.length }}
+    </div>
   </div>
 </template>
