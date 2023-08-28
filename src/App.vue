@@ -75,7 +75,7 @@ watch([postsArr, page], () => {
       <button @click='() => changePage(page + 1)'
         class='border border-gray-300 rounded px-8 py-1 hover:bg-gray-200'>Siguiente</button>
     </div>
-    <PostList :postsArr='paginatedPost' />
+    <PostList :postsArr='filteredPost.length > 0 ? filteredPost : paginatedPost' />
     <div class='my-8 flex justify-center space-x-6'>
       Numero total de post: {{ postsArr.length }}
     </div>
