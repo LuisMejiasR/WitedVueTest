@@ -1,22 +1,25 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-
-import PageHeader from "./components/PageHeader.vue"
+import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import axiosClient from './utils/axios'
+import { usePostStore } from './stores/postStore'
+import PageHeader from "./components/PageHeader.vue"
 
-import { IPost } from './models/post.model'
+// pinia store
+const postStore = usePostStore()
+const { postsArr } = storeToRefs(postStore)
 
-const posts = ref<IPost[]>([])
-
+// async fn calling axios and setting state of pinia store
 const fetchPosts = async () => {
   try {
-    const { data } = await axiosClient.get('/')
-    posts.value = data
+    const response = await axiosClient.get('/')
+    postStore.loadPost(response.data)
   } catch (error) {
     console.log(error)
   }
 }
 
+// when component mounts, call fn
 onMounted(() => {
   fetchPosts()
 })
@@ -24,7 +27,7 @@ onMounted(() => {
 
 <template>
   <PageHeader />
-  <div v-for="post in posts">
+  <div v-for="post in postsArr">
     {{ post.title }}
   </div>
 </template>
