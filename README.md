@@ -1,10 +1,10 @@
 # Proyecto
 
 Página online:
-https://luismejiasr.github.io/
+https://luismejiasr.github.io/WitedVueTest/
 
 Repositorio:
-https://github.com/LuisMejiasR/
+https://github.com/LuisMejiasR/WitedVueTest
 
 ## Contexto
 - En el mundo actual, quiero poder demostrar mis habilidades de programación y diseño al dejar disponible en la nube una página web la cual me pueda representar teniendo en cuenta que estoy trabajando con nueva tecnología.
