@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 import { ref } from 'vue'
 import { IPost } from '../models/post.model';
+import { capitalize } from '../utils/capitalize';
 
 interface IPostModal {
     post: IPost
@@ -21,13 +22,16 @@ const open = ref(false)
     <div v-if='open' @click='open = false'
         class='fixed overflow-x-hidden overflow-y-auto inset-0 flex justify-center items-center z-50'>
         <div class='bg-white p-10 rounded-lg relative mx-auto w-auto max-w-lg flex-row justify-center items-center '>
+            <h3 class='text-center mb-6 font-extrabold'>
+                Información del post:
+            </h3>
             <div class=''>
                 <span class='font-bold'>Titulo del post: </span>
-                {{ post.title }}
+                {{ capitalize(post.title) }}
             </div>
             <div class=''>
                 <span class='font-bold'>Cuerpo del post: </span>
-                {{ post.body }}
+                {{ capitalize(post.body) }}
             </div>
             <div class=''>
                 <span class='font-bold'>Id del post: </span>
