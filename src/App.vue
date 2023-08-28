@@ -43,6 +43,14 @@ onMounted(() => {
       <input type=' text' class='border border-gray-300 rounded w-full p-2 px-4' placeholder='Buscar post'
         @input='filterPosts' v-model='search'>
     </div>
-    <PostList :postsArr='filteredPost.length > 0 ? filteredPost.slice(0, 10) : []' />
+    <div v-if='filteredPost.length === 0' class='flex flex-col items-center shadow-md mb-6'>
+      <span class='mb-4 font-semibold text-lg'>
+        No encontramos lo que estabas buscando...
+      </span>
+      <span class='mb-4 font-semibold text-xl'>
+        Mira estos otros post que te podrían interesar:
+      </span>
+    </div>
+    <PostList :postsArr='filteredPost.length > 0 ? filteredPost.slice(0, 10) : postsArr.slice(0, 10)' />
   </div>
 </template>
